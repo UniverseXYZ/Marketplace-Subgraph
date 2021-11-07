@@ -1,0 +1,24 @@
+specVersion: 0.0.2
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: UniverseMarketplace
+    network: ropsten
+    source:
+      address: "0xCB11366370C68cb1795B94fF8588Ad6Db590e15E"
+      abi: UniverseMarketplace
+      startBlock: 11303625
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - OrderMatchEntity
+      abis:
+        - name: UniverseMarketplace
+          file: UniverseMarketplace/abis/UniverseMarketplace.json
+      eventHandlers:
+        - event: Match(bytes32,bytes32,address,address,uint256,uint256,(bytes4,bytes),(bytes4,bytes))
+          handler: handleOrderMatch
+      file: UniverseMarketplace/UniverseMarketplace.wasm

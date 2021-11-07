@@ -1,0 +1,17 @@
+type OrderMatchEntity @entity {
+  id: ID!
+  leftOrderHash: Bytes!
+  rightOrderHash: Bytes!
+  leftMaker: Bytes! # address
+  rightMaker: Bytes! # address
+  newLeftFill: BigInt!
+  newRightFill: BigInt!
+  txFrom: Bytes!
+  txValue: BigInt
+  blockNumber: Int!
+  blockTimestamp: Int!
+  leftAssetClass: Bytes!
+  rightAssetClass: Bytes!
+  leftAssetData: Bytes!
+  rightAssetData: Bytes!
+}
