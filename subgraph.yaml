@@ -8,10 +8,10 @@ dataSources:
     network: rinkeby
     source:
       # address: "0xCB11366370C68cb1795B94fF8588Ad6Db590e15E"
-      address: "0x6Fc96E8C1DE8CC166dD5CDD647Fcc384a89AA4CE"
+      address: "0xe441c394F917D5a90019C76897458257801ce132"
       abi: UniverseMarketplace
       # startBlock: 11303625
-      startBlock: 9852269 
+      startBlock: 10211840 
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
