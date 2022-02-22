@@ -314,7 +314,7 @@ export class UniverseMarketplace extends ethereum.SmartContract {
   ): Bytes {
     let result = super.call(
       "encodeOrderData",
-      "encodeOrderData(((address,uint96)[])):(bytes)",
+      "encodeOrderData((tuple[])):(bytes)",
       [ethereum.Value.fromTuple(data)]
     );
 
@@ -326,7 +326,7 @@ export class UniverseMarketplace extends ethereum.SmartContract {
   ): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
       "encodeOrderData",
-      "encodeOrderData(((address,uint96)[])):(bytes)",
+      "encodeOrderData((tuple[])):(bytes)",
       [ethereum.Value.fromTuple(data)]
     );
     if (result.reverted) {

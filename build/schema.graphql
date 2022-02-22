@@ -15,3 +15,17 @@ type OrderMatchEntity @entity {
   leftAssetData: Bytes!
   rightAssetData: Bytes!
 }
+
+type OrderCancelEntity @entity {
+  id: ID! # id is the tx hash of the event
+  leftOrderHash: Bytes!
+  leftMaker: Bytes!
+  leftAssetClass: Bytes!
+  rightAssetClass: Bytes!
+  leftAssetData: Bytes!
+  rightAssetData: Bytes!
+  txFrom: Bytes!
+  txValue: BigInt
+  blockNumber: Int!
+  blockTimestamp: Int!
+}

@@ -1,8 +1,9 @@
 import { BigInt } from "@graphprotocol/graph-ts"
 import {
+  Cancel,
   Match
 } from "../generated/UniverseMarketplace/UniverseMarketplace"
-import { OrderMatchEntity } from "../generated/schema"
+import { OrderMatchEntity, OrderCancelEntity } from "../generated/schema"
 
 export function handleOrderMatch(event: Match): void {
   // Entities can be loaded from the store using a string ID; this ID
@@ -26,7 +27,7 @@ export function handleOrderMatch(event: Match): void {
   entity.rightAssetClass = event.params.rightAsset.assetClass;
   entity.leftAssetData = event.params.leftAsset.data;
   entity.rightAssetData = event.params.rightAsset.data;
-
+  
   entity.txFrom = event.transaction.from;
   entity.txValue = event.transaction.value;
 
@@ -55,3 +56,25 @@ export function handleOrderMatch(event: Match): void {
   // - contract.implementation(...)
 }
 
+export function handleOrderCancel(event: Cancel): void {
+  let entity = OrderCancelEntity.load(event.transaction.hash.toHex())
+
+  if (entity == null) {
+    entity = new OrderCancelEntity(event.transaction.hash.toHex())
+  }
+
+  entity.leftOrderHash = event.params.hash;
+  entity.leftMaker = event.params.maker;
+  entity.leftAssetClass = event.params.makeAssetType.assetClass;
+  entity.rightAssetClass = event.params.takeAssetType.assetClass;
+  entity.leftAssetData = event.params.makeAssetType.data;
+  entity.rightAssetData = event.params.takeAssetType.data;
+
+  entity.txFrom = event.transaction.from;
+  entity.txValue = event.transaction.value;
+
+  entity.blockNumber = event.block.number.toI32();
+  entity.blockTimestamp = event.block.timestamp.toI32();
+
+  entity.save()
+}

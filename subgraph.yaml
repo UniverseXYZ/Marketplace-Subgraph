@@ -4,21 +4,27 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: UniverseMarketplace
-    network: ropsten
+    # network: ropsten
+    network: rinkeby
     source:
-      address: "0xCB11366370C68cb1795B94fF8588Ad6Db590e15E"
+      # address: "0xCB11366370C68cb1795B94fF8588Ad6Db590e15E"
+      address: "0x6Fc96E8C1DE8CC166dD5CDD647Fcc384a89AA4CE"
       abi: UniverseMarketplace
-      startBlock: 11303625
+      # startBlock: 11303625
+      startBlock: 9852269 
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
         - OrderMatchEntity
+        - OrderCancelEntity
       abis:
         - name: UniverseMarketplace
           file: ./abis/UniverseMarketplace.json
       eventHandlers:
         - event: Match(bytes32,bytes32,address,address,uint256,uint256,(bytes4,bytes),(bytes4,bytes))
           handler: handleOrderMatch
+        - event: Cancel(bytes32,address,(bytes4,bytes),(bytes4,bytes))
+          handler: handleOrderCancel
       file: ./src/mapping.ts
