@@ -107,7 +107,7 @@ export class OrderMatchEntity extends Entity {
 
   get txValue(): BigInt | null {
     let value = this.get("txValue");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (value === null) {
       return null;
     } else {
       return value.toBigInt();
@@ -174,5 +174,134 @@ export class OrderMatchEntity extends Entity {
 
   set rightAssetData(value: Bytes) {
     this.set("rightAssetData", Value.fromBytes(value));
+  }
+}
+
+export class OrderCancelEntity extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save OrderCancelEntity entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save OrderCancelEntity entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("OrderCancelEntity", id.toString(), this);
+  }
+
+  static load(id: string): OrderCancelEntity | null {
+    return store.get("OrderCancelEntity", id) as OrderCancelEntity | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get leftOrderHash(): Bytes {
+    let value = this.get("leftOrderHash");
+    return value.toBytes();
+  }
+
+  set leftOrderHash(value: Bytes) {
+    this.set("leftOrderHash", Value.fromBytes(value));
+  }
+
+  get leftMaker(): Bytes {
+    let value = this.get("leftMaker");
+    return value.toBytes();
+  }
+
+  set leftMaker(value: Bytes) {
+    this.set("leftMaker", Value.fromBytes(value));
+  }
+
+  get leftAssetClass(): Bytes {
+    let value = this.get("leftAssetClass");
+    return value.toBytes();
+  }
+
+  set leftAssetClass(value: Bytes) {
+    this.set("leftAssetClass", Value.fromBytes(value));
+  }
+
+  get rightAssetClass(): Bytes {
+    let value = this.get("rightAssetClass");
+    return value.toBytes();
+  }
+
+  set rightAssetClass(value: Bytes) {
+    this.set("rightAssetClass", Value.fromBytes(value));
+  }
+
+  get leftAssetData(): Bytes {
+    let value = this.get("leftAssetData");
+    return value.toBytes();
+  }
+
+  set leftAssetData(value: Bytes) {
+    this.set("leftAssetData", Value.fromBytes(value));
+  }
+
+  get rightAssetData(): Bytes {
+    let value = this.get("rightAssetData");
+    return value.toBytes();
+  }
+
+  set rightAssetData(value: Bytes) {
+    this.set("rightAssetData", Value.fromBytes(value));
+  }
+
+  get txFrom(): Bytes {
+    let value = this.get("txFrom");
+    return value.toBytes();
+  }
+
+  set txFrom(value: Bytes) {
+    this.set("txFrom", Value.fromBytes(value));
+  }
+
+  get txValue(): BigInt | null {
+    let value = this.get("txValue");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set txValue(value: BigInt | null) {
+    if (value === null) {
+      this.unset("txValue");
+    } else {
+      this.set("txValue", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get blockNumber(): i32 {
+    let value = this.get("blockNumber");
+    return value.toI32();
+  }
+
+  set blockNumber(value: i32) {
+    this.set("blockNumber", Value.fromI32(value));
+  }
+
+  get blockTimestamp(): i32 {
+    let value = this.get("blockTimestamp");
+    return value.toI32();
+  }
+
+  set blockTimestamp(value: i32) {
+    this.set("blockTimestamp", Value.fromI32(value));
   }
 }
