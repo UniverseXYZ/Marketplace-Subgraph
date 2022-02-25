@@ -3,13 +3,13 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "bytes32",
         "name": "hash",
         "type": "bytes32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "maker",
         "type": "address"
@@ -58,19 +58,19 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "bytes32",
         "name": "leftHash",
         "type": "bytes32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "bytes32",
         "name": "rightHash",
         "type": "bytes32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "leftMaker",
         "type": "address"
@@ -254,29 +254,29 @@
   {
     "inputs": [
       {
-        "internalType": "contract INftTransferProxy",
-        "name": "_transferProxy",
-        "type": "address"
-      },
-      {
-        "internalType": "contract IERC20TransferProxy",
-        "name": "_erc20TransferProxy",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
-        "name": "newProtocolFee",
+        "name": "protocolFee",
         "type": "uint256"
       },
       {
         "internalType": "address",
-        "name": "newDefaultFeeReceiver",
+        "name": "defaultFeeReceiver",
         "type": "address"
       },
       {
         "internalType": "contract IRoyaltiesProvider",
-        "name": "newRoyaltiesProvider",
+        "name": "royaltiesProvider",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxBundleSize",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxBatchTransferSize",
+        "type": "uint256"
       }
     ],
     "name": "__UniverseMarketplace_init",
@@ -454,6 +454,36 @@
       }
     ],
     "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "tokenAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ITransferExecutor.ERC721Item[]",
+        "name": "erc721Items",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "erc721BatchTransfer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -714,6 +744,32 @@
   },
   {
     "inputs": [],
+    "name": "maxBatchTransferSize",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "maxBundleSize",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "owner",
     "outputs": [
       {
@@ -767,7 +823,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "daoFee",
+        "name": "_daoFee",
         "type": "uint256"
       }
     ],
@@ -803,6 +859,32 @@
       }
     ],
     "name": "setFeeReceiver",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_maxBatchTransferSize",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxBatchTransferSize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_maxBundleSize",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxBundleSize",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

@@ -11,7 +11,7 @@ dataSources:
       address: "0xe441c394F917D5a90019C76897458257801ce132"
       abi: UniverseMarketplace
       # startBlock: 11303625
-      startBlock: 10211840 
+      startBlock: 10211840
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -23,8 +23,8 @@ dataSources:
         - name: UniverseMarketplace
           file: ./abis/UniverseMarketplace.json
       eventHandlers:
-        - event: Match(bytes32,bytes32,address,address,uint256,uint256,(bytes4,bytes),(bytes4,bytes))
+        - event: Match(indexed bytes32,indexed bytes32,indexed address,address,uint256,uint256,(bytes4,bytes),(bytes4,bytes))
           handler: handleOrderMatch
-        - event: Cancel(bytes32,address,(bytes4,bytes),(bytes4,bytes))
+        - event: Cancel(indexed bytes32,indexed address,(bytes4,bytes),(bytes4,bytes))
           handler: handleOrderCancel
       file: ./src/mapping.ts
