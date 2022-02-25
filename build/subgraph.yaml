@@ -20,8 +20,8 @@ dataSources:
         - name: UniverseMarketplace
           file: UniverseMarketplace\abis\UniverseMarketplace.json
       eventHandlers:
-        - event: Match(bytes32,bytes32,address,address,uint256,uint256,(bytes4,bytes),(bytes4,bytes))
+        - event: Match(indexed bytes32,indexed bytes32,indexed address,address,uint256,uint256,(bytes4,bytes),(bytes4,bytes))
           handler: handleOrderMatch
-        - event: Cancel(bytes32,address,(bytes4,bytes),(bytes4,bytes))
+        - event: Cancel(indexed bytes32,indexed address,(bytes4,bytes),(bytes4,bytes))
           handler: handleOrderCancel
       file: UniverseMarketplace\UniverseMarketplace.wasm

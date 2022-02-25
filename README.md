@@ -1,5 +1,8 @@
 
-## First build the subgraph with
+## First run codegen the subgraph with
+graph codegen
+
+## Then build the subgraph with
 graph build
 
 ## Then deploy the subgraph with

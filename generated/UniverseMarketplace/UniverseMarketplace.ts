@@ -376,6 +376,48 @@ export class UniverseMarketplace extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
+  maxBatchTransferSize(): BigInt {
+    let result = super.call(
+      "maxBatchTransferSize",
+      "maxBatchTransferSize():(uint256)",
+      []
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_maxBatchTransferSize(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "maxBatchTransferSize",
+      "maxBatchTransferSize():(uint256)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  maxBundleSize(): BigInt {
+    let result = super.call("maxBundleSize", "maxBundleSize():(uint256)", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_maxBundleSize(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "maxBundleSize",
+      "maxBundleSize():(uint256)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   owner(): Address {
     let result = super.call("owner", "owner():(address)", []);
 
@@ -432,24 +474,24 @@ export class __UniverseMarketplace_initCall__Inputs {
     this._call = call;
   }
 
-  get _transferProxy(): Address {
-    return this._call.inputValues[0].value.toAddress();
+  get protocolFee(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
   }
 
-  get _erc20TransferProxy(): Address {
+  get defaultFeeReceiver(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get newProtocolFee(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
+  get royaltiesProvider(): Address {
+    return this._call.inputValues[2].value.toAddress();
   }
 
-  get newDefaultFeeReceiver(): Address {
-    return this._call.inputValues[3].value.toAddress();
+  get maxBundleSize(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
   }
 
-  get newRoyaltiesProvider(): Address {
-    return this._call.inputValues[4].value.toAddress();
+  get maxBatchTransferSize(): BigInt {
+    return this._call.inputValues[4].value.toBigInt();
   }
 }
 
@@ -566,6 +608,52 @@ export class CancelCallOrderTakeAssetAssetTypeStruct extends ethereum.Tuple {
 
   get data(): Bytes {
     return this[1].toBytes();
+  }
+}
+
+export class Erc721BatchTransferCall extends ethereum.Call {
+  get inputs(): Erc721BatchTransferCall__Inputs {
+    return new Erc721BatchTransferCall__Inputs(this);
+  }
+
+  get outputs(): Erc721BatchTransferCall__Outputs {
+    return new Erc721BatchTransferCall__Outputs(this);
+  }
+}
+
+export class Erc721BatchTransferCall__Inputs {
+  _call: Erc721BatchTransferCall;
+
+  constructor(call: Erc721BatchTransferCall) {
+    this._call = call;
+  }
+
+  get erc721Items(): Array<Erc721BatchTransferCallErc721ItemsStruct> {
+    return this._call.inputValues[0].value.toTupleArray<
+      Erc721BatchTransferCallErc721ItemsStruct
+    >();
+  }
+
+  get to(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class Erc721BatchTransferCall__Outputs {
+  _call: Erc721BatchTransferCall;
+
+  constructor(call: Erc721BatchTransferCall) {
+    this._call = call;
+  }
+}
+
+export class Erc721BatchTransferCallErc721ItemsStruct extends ethereum.Tuple {
+  get tokenAddress(): Address {
+    return this[0].toAddress();
+  }
+
+  get tokenId(): BigInt {
+    return this[1].toBigInt();
   }
 }
 
@@ -844,7 +932,7 @@ export class SetDaoFeeCall__Inputs {
     this._call = call;
   }
 
-  get daoFee(): BigInt {
+  get _daoFee(): BigInt {
     return this._call.inputValues[0].value.toBigInt();
   }
 }
@@ -917,6 +1005,66 @@ export class SetFeeReceiverCall__Outputs {
   _call: SetFeeReceiverCall;
 
   constructor(call: SetFeeReceiverCall) {
+    this._call = call;
+  }
+}
+
+export class SetMaxBatchTransferSizeCall extends ethereum.Call {
+  get inputs(): SetMaxBatchTransferSizeCall__Inputs {
+    return new SetMaxBatchTransferSizeCall__Inputs(this);
+  }
+
+  get outputs(): SetMaxBatchTransferSizeCall__Outputs {
+    return new SetMaxBatchTransferSizeCall__Outputs(this);
+  }
+}
+
+export class SetMaxBatchTransferSizeCall__Inputs {
+  _call: SetMaxBatchTransferSizeCall;
+
+  constructor(call: SetMaxBatchTransferSizeCall) {
+    this._call = call;
+  }
+
+  get _maxBatchTransferSize(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetMaxBatchTransferSizeCall__Outputs {
+  _call: SetMaxBatchTransferSizeCall;
+
+  constructor(call: SetMaxBatchTransferSizeCall) {
+    this._call = call;
+  }
+}
+
+export class SetMaxBundleSizeCall extends ethereum.Call {
+  get inputs(): SetMaxBundleSizeCall__Inputs {
+    return new SetMaxBundleSizeCall__Inputs(this);
+  }
+
+  get outputs(): SetMaxBundleSizeCall__Outputs {
+    return new SetMaxBundleSizeCall__Outputs(this);
+  }
+}
+
+export class SetMaxBundleSizeCall__Inputs {
+  _call: SetMaxBundleSizeCall;
+
+  constructor(call: SetMaxBundleSizeCall) {
+    this._call = call;
+  }
+
+  get _maxBundleSize(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetMaxBundleSizeCall__Outputs {
+  _call: SetMaxBundleSizeCall;
+
+  constructor(call: SetMaxBundleSizeCall) {
     this._call = call;
   }
 }
