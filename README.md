@@ -10,3 +10,6 @@ graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph
 
 ## Current subgraph endpoint
 https://api.thegraph.com/subgraphs/name/paveldonskikh/orderbookrinkeby
+
+## @See subgraph quick start
+https://thegraph.com/docs/en/developer/quick-start/
