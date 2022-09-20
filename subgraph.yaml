@@ -5,13 +5,16 @@ dataSources:
   - kind: ethereum/contract
     name: UniverseMarketplace
     # network: ropsten
-    network: rinkeby
+    # network: rinkeby
+    network: goerli
     source:
       # address: "0xCB11366370C68cb1795B94fF8588Ad6Db590e15E"
-      address: "0xe441c394F917D5a90019C76897458257801ce132"
+      # address: "0xe441c394F917D5a90019C76897458257801ce132"
+      address: "0xdE8C8fF3835c5E5cAe88b5b403ef56b9243381B1"
       abi: UniverseMarketplace
       # startBlock: 11303625
-      startBlock: 10211840
+      # startBlock: 10211840
+      startBlock: 7626284
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
